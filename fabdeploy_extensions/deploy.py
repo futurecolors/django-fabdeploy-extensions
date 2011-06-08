@@ -23,7 +23,7 @@ def full_deploy():
 
     chmod.set_chmod()
     dj_cmd.collectstatic()
-    dj_cmd.compress()
+    dj_cmd.manage('compress')
 
 
 def deploy_project():

@@ -7,3 +7,4 @@ from deploy import *
 from django_commands import *
 from system import *
 from extensions.uwsgi import *
+from extensions.nginx import *
