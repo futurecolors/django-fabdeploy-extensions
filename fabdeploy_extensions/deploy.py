@@ -7,7 +7,7 @@ from fabric.contrib import files
 from fabric.utils import warn
 
 import system
-from fabdeploy_extensions.extensions import chmod, uwsgi, nginx
+from extensions import chmod, uwsgi, nginx
 import django_commands as dj_cmd
 
 

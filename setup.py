@@ -12,7 +12,7 @@ setup(
     version = version,
     author = 'Future Colors',
     author_email = 'info@futurecolors.ru',
-    packages = ['fabdeploy_extensions'],
+    packages = ['fabdeploy_extensions', 'fabdeploy_extensions.extensions'],
     url = 'https://github.com/futurecolors/django-fabdeploy-extensions',
     download_url = 'https://github.com/futurecolors/django-fabdeploy-extensions/zipball/master',
     license = 'MIT license',

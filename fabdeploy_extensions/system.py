@@ -3,7 +3,7 @@ from fab_deploy import utils, mysql, system
 from fabric.api import run, env, settings, hide, sudo
 from fabric.utils import warn
 from fabric import utils as fabric_utils
-from fabdeploy_extensions.extensions import redis
+from extensions import redis
 
 
 def prepare_server():
