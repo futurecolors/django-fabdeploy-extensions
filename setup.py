@@ -18,7 +18,7 @@ setup(
     license = 'MIT license',
     description = u'Fabdeploy extension to use UWSGI'.encode('utf8'),
     long_description = open('README').read().decode('utf8'),
-    requires = ['django-fab-deploy (>=0.7.1)', 'Fabric (>=1.0.0)', 'jinja2'],
+    requires = ['fab_deploy (>=0.7.1)', 'Fabric (>=1.0.0)', 'jinja2'],
 
     classifiers=(
         'Development Status :: 4 - Beta',
