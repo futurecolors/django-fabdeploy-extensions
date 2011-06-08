@@ -1,0 +1,18 @@
+=========================================
+django-fabdeploy-extensions
+=========================================
+
+This package extends functionality of django-fab-deploy
+https://bitbucket.org/kmike/django-fab-deploy/overview
+
+CAUTION: This package is not intended to be universal tool and might not suit your needs as a whole.
+But you may find some of it's features useful and use them separately.
+
+Features:
+
+* UWSGI instead of Apache webserver
+* Testing sources from mirror.yandex.ru
+* Redis as cache backend by default
+* Alternative approach for handling settings (split for evnironments, developers and applications)
+* Sphinx fabric scripts
+* multiple small improvements
