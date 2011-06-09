@@ -8,3 +8,4 @@ from django_commands import *
 from system import *
 from extensions.uwsgi import *
 from extensions.nginx import *
+from extensions.htpasswd import *
