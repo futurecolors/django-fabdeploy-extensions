@@ -1,0 +1,19 @@
+# List of nodes to start
+CELERYD_NODES="worker1 worker2 worker3"
+# ... can also be a number of workers
+CELERYD_NODES=3
+# Where to chdir at start.
+CELERYD_CHDIR="/opt/Myproject/"
+# Extra arguments to celeryd
+CELERYD_OPTS="--time-limit=300"
+# Name of the celery config module.#
+CELERY_CONFIG_MODULE="celeryconfig"
+
+#   # Where the Django project is.
+#   CELERYD_CHDIR="/opt/Project/"
+#
+#   # Name of the projects settings module.
+#   export DJANGO_SETTINGS_MODULE="settings"
+#
+#   # Path to celeryd
+#   CELERYD="/opt/Project/manage.py celeryd"
