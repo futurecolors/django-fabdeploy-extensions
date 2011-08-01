@@ -94,10 +94,6 @@
 # Short-Description: celery task worker daemon
 ### END INIT INFO
 
-CELERYD_USER = "celery"
-CELERYD_GROUP = "celery"
-
-
 set -e
 
 DEFAULT_PID_FILE="/var/run/celeryd@%n.pid"
