@@ -5,7 +5,7 @@ from fab_deploy import utils
 from fab_deploy import system
 
 
-__all__ = ['uwsgi_install', 'uwsgi_setup', 'uwsgi_start', 'uwsgi_restart', 'uwsgi_reload']
+__all__ = ['uwsgi_install', 'uwsgi_stop', 'uwsgi_setup', 'uwsgi_start', 'uwsgi_restart', 'uwsgi_reload']
 
 
 @utils.run_as_sudo
@@ -47,3 +47,9 @@ def uwsgi_restart():
 def uwsgi_reload():
     ''' Start uWSGI '''
     sudo('/etc/init.d/uwsgi reload')
+
+
+@utils.run_as_sudo
+def uwsgi_stop():
+    ''' Stop uWSGI '''
+    sudo('/etc/init.d/uwsgi stop')

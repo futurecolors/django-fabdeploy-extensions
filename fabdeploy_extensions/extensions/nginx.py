@@ -9,7 +9,7 @@ __all__ = ['nginx_install', 'nginx_setup', 'nginx_restart', 'nginx_start']
 def nginx_install():
     """ Installs nginx. """
     os = utils.detect_os()
-    options = {'squeeze': '-t testing'}
+    options = {'squeeze': '-t backports'}
     system.aptitude_install('nginx-full', options.get(os, ''))
     sudo('rm -f /etc/nginx/sites-enabled/default')
 

@@ -29,13 +29,13 @@ def setup_testing_sources():
     os = utils.detect_os()
     debian_repo = 'http://mirror.yandex.ru'
     testing = {
-        'squeeze': '{0}/debian wheezy main non-free contrib'.format(debian_repo),
+        'squeeze': '{0}/debian-backports squeeze-backports main'.format(debian_repo),
     }
 
     if os not in testing:
         fabric_utils.puts("Testing sources are not available for " + os)
         return
 
-    sudo("echo 'deb %s' > /etc/apt/sources.list.d/wheezy.list" % testing[os])
+    sudo("echo 'deb %s' > /etc/apt/sources.list.d/backports.list" % testing[os])
     with settings(warn_only=True):
         run('aptitude update')

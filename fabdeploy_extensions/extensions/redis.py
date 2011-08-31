@@ -7,7 +7,7 @@ from fab_deploy import system
 def redis_install():
     """ Installs Redis """
     os = utils.detect_os()
-    options = {'squeeze': '-t testing'}
+    options = {'squeeze': '-t squeeze-backports'}
     system.aptitude_install('redis-server', options.get(os, ''))
 
 @utils.run_as_sudo

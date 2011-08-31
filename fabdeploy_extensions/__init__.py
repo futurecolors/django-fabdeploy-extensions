@@ -9,4 +9,5 @@ from system import *
 from extensions.uwsgi import *
 from extensions.nginx import *
 from extensions.htpasswd import *
+from extensions.redis import *
 from extensions.celery import *
