@@ -14,7 +14,7 @@ SPHINX_CONFIG = '/etc/sphinxsearch/sphinx.conf'
 
 
 @utils.run_as_sudo
-def sphinx_setup():
+def sphinx_install():
     ''' Install sphinx search '''
     aptitude_install('sphinxsearch')
     sudo('sed -i "s/START=no/START=yes/g" /etc/default/sphinxsearch')
@@ -22,8 +22,8 @@ def sphinx_setup():
 
 @utils.run_as_sudo
 @utils.inside_project
-def sphinx_config(apps):
-    ''' Generate sphinx config from django '''
+def sphinx_setup(apps):
+    ''' Sphinx setup '''
 
     generate_command = get_manage_py_command('generate_sphinx_config')
     sudo('{0} {1} > {2}'.format(generate_command, apps, SPHINX_CONFIG))
