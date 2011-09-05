@@ -19,37 +19,42 @@ def uwsgi_install():
 @utils.run_as_sudo
 def uwsgi_setup():
     """ Setups uWSGI. """
+    name = env.conf['INSTANCE_NAME']
     sudo('adduser --system --no-create-home --disabled-login --disabled-password --group uwsgi')
 
     sudo('mkdir -p /var/log/uwsgi')
     sudo('chown uwsgi: /var/log/uwsgi')
 
-    utils.upload_config_template('uwsgi.sh', '/etc/init.d/uwsgi', use_sudo=True)
-    sudo('chmod +x /etc/init.d/uwsgi')
-    sudo('update-rc.d uwsgi defaults')
-    uwsgi_start()
+    utils.upload_config_template('uwsgi.sh', '/etc/init.d/uwsgi-%s' % name, use_sudo=True)
+    sudo('chmod +x /etc/init.d/uwsgi-%s' % name)
+    sudo('update-rc.d uwsgi-%s defaults' % name)
+    uwsgi_restart()
 
 
 @utils.run_as_sudo
 def uwsgi_start():
     ''' Start uWSGI '''
+    name = env.conf['INSTANCE_NAME']
     with settings(warn_only=True):
-        sudo('/etc/init.d/uwsgi start')
+        sudo('/etc/init.d/uwsgi-%s start' % name)
 
 
 @utils.run_as_sudo
 def uwsgi_restart():
     ''' Restart uWSGI '''
-    sudo('/etc/init.d/uwsgi restart')
+    name = env.conf['INSTANCE_NAME']
+    sudo('/etc/init.d/uwsgi-%s restart' % name)
 
 
 @utils.run_as_sudo
 def uwsgi_reload():
     ''' Start uWSGI '''
-    sudo('/etc/init.d/uwsgi reload')
+    name = env.conf['INSTANCE_NAME']
+    sudo('/etc/init.d/uwsgi-%s reload' % name)
 
 
 @utils.run_as_sudo
 def uwsgi_stop():
     ''' Stop uWSGI '''
-    sudo('/etc/init.d/uwsgi stop')
+    name = env.conf['INSTANCE_NAME']
+    sudo('/etc/init.d/uwsgi-%s stop' % name)

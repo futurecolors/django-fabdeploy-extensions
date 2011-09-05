@@ -1,10 +1,10 @@
 #!/bin/sh
 
 PYTHONPATH={{ PROJECT_DIR }}
-MODULE=wsgi
+MODULE="django.core.handlers.wsgi:WSGIHandler()"
 
 ### BEGIN INIT INFO
-# Provides:          uwsgi
+# Provides:          uwsgi-{{ INSTANCE_NAME }}
 # Required-Start:    $all
 # Required-Stop:     $all
 # Default-Start:     2 3 4 5
@@ -18,26 +18,33 @@ DAEMON={{ ENV_DIR }}/bin/uwsgi
 
 OWNER=uwsgi
 
-NAME=uwsgi
-DESC=uwsgi
+NAME=uwsgi-{{ INSTANCE_NAME }}
+DESC=uwsgi-{{ INSTANCE_NAME }}
 
 test -x $DAEMON || exit 0
 
 set -e
 
-DAEMON_OPTS="-s 127.0.0.1:4000 -M 4 -t 30 -A 4 -p 4 -d /var/log/uwsgi/uwsgi.log --pythonpath $PYTHONPATH --module $MODULE --home {{ ENV_DIR }}/"
+DAEMON_OPTS="-s 127.0.0.1:{{ UWSGI_PORT }} \
+--master \
+--harakiri 30 \
+--sharedarea 4  \
+--processes 4  \
+--daemonize /var/log/uwsgi/{{ SERVER_NAME }}.log \
+--pythonpath $PYTHONPATH --module $MODULE \
+--env DJANGO_SETTINGS_ENVIRONMENT={{ NAME }} --env DJANGO_SETTINGS_MODULE=settings --home {{ ENV_DIR }}/"
 
 case "$1" in
   start)
         echo -n "Starting $DESC: "
         start-stop-daemon --start --chuid $OWNER:$OWNER --user $OWNER \
-                --exec $DAEMON -- $DAEMON_OPTS
+                --exec $DAEMON -- $DAEMON_OPTS || true
         echo "$NAME."
         ;;
   stop)
         echo -n "Stopping $DESC: "
         start-stop-daemon --signal 3 --user $OWNER --quiet --retry 2 --stop \
-                --exec $DAEMON
+                --exec $DAEMON || true
         echo "$NAME."
         ;;
   reload)
@@ -49,10 +56,10 @@ case "$1" in
   restart)
         echo -n "Restarting $DESC: "
         start-stop-daemon --signal 3 --user $OWNER --quiet --retry 2 --stop \
-                --exec $DAEMON
+                --exec $DAEMON  || true
         sleep 1
         start-stop-daemon --user $OWNER --start --quiet --chuid $OWNER:$OWNER \
-               --exec $DAEMON -- $DAEMON_OPTS
+               --exec $DAEMON -- $DAEMON_OPTS || true
         echo "$NAME."
         ;;
   status)
