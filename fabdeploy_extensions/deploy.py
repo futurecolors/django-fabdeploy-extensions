@@ -9,6 +9,7 @@ from fabric.utils import warn
 import system
 from extensions import chmod, uwsgi, nginx
 import django_commands as dj_cmd
+from django.conf import settings
 
 
 __all__ = ['full_deploy', 'deploy_project',
@@ -23,7 +24,8 @@ def full_deploy():
 
     chmod.set_chmod()
     dj_cmd.collectstatic()
-    dj_cmd.manage('compress')
+    if getattr(settings, 'COMPRESS_OFFINE', False):
+        dj_cmd.manage('compress')
 
 
 def deploy_project():
@@ -36,7 +38,8 @@ def deploy_project():
     dj_cmd.syncdb()
     dj_cmd.migrate()
     dj_cmd.collectstatic()
-    dj_cmd.manage('compress')
+    if getattr(settings, 'COMPRESS_OFFINE', False):
+        dj_cmd.manage('compress')
 
 
 def update_django_config(restart=True):
@@ -79,7 +82,8 @@ def push(*args, **kwargs):
         dj_cmd.migrate()
 
     dj_cmd.collectstatic()
-    dj_cmd.manage('compress')
+    if getattr(settings, 'COMPRESS_OFFINE', False):
+        dj_cmd.manage('compress')
 
     # execute 'before_restart' callback
     kwargs.get('before_restart', lambda: None)()
