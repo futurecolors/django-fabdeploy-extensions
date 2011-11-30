@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from fab_deploy import virtualenv, deploy, vcs, utils
+from fab_deploy.utils import inside_project
 from fabric.api import run, env, settings, hide, puts
 from fabric.context_managers import cd
 from fabric.contrib import console
@@ -58,6 +59,12 @@ def setup_web_server():
     uwsgi.uwsgi_setup()
 
 
+@inside_project
+def delete_pyc():
+    """ Deletes *.pyc files from project source dir """
+    run("rm -Rf *.pyc")
+
+
 def push(*args, **kwargs):
     allowed_args = set(['notest', 'syncdb', 'migrate', 'pip_update', 'norestart'])
     for arg in args:
@@ -67,7 +74,7 @@ def push(*args, **kwargs):
             return
 
     vcs.push()
-    utils.delete_pyc()
+    delete_pyc()
     with cd('src/' + env.conf['INSTANCE_NAME']):
         vcs.up()
 
