@@ -62,7 +62,7 @@ def setup_web_server():
 @inside_project
 def delete_pyc():
     """ Deletes *.pyc files from project source dir """
-    run("rm -Rf *.pyc")
+    run("for i in `ls | grep -v media`; do find $i -name '*.pyc' -delete; done")
 
 
 def push(*args, **kwargs):
