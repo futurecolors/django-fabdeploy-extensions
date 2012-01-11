@@ -6,6 +6,7 @@ from fab_deploy.deploy import up
 from deploy import *
 from django_commands import *
 from system import *
+from virtualenv import *
 from extensions.uwsgi import *
 from extensions.nginx import *
 from extensions.htpasswd import *
