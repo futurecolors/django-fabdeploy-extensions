@@ -5,7 +5,7 @@ from distutils.core import setup
 import sys
 reload(sys).setdefaultencoding("UTF-8")
 
-version = '0.1.2'
+version = '0.2.0'
 
 setup(
     name ='django-fabdeploy-extensions',
