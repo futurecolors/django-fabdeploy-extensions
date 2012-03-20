@@ -6,6 +6,7 @@ from fabric.context_managers import cd
 from fabric.contrib import console
 from fabric.contrib import files
 from fabric.utils import warn
+from .virtualenv import pip_update
 
 import system
 from extensions import chmod, uwsgi, nginx
@@ -79,7 +80,7 @@ def push(*args, **kwargs):
         vcs.up()
 
     if 'pip_update' in args:
-        virtualenv.pip_update(restart=False)
+        pip_update(restart=False)
     if 'syncdb' in args:
         dj_cmd.syncdb()
     if 'migrate' in args:
