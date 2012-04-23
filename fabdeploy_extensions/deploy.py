@@ -9,7 +9,7 @@ from fabric.utils import warn
 from .virtualenv import pip_update
 
 import system
-from extensions import chmod, uwsgi, nginx
+from extensions import chmod, uwsgi, nginx, celery
 import django_commands as dj_cmd
 
 
@@ -94,3 +94,4 @@ def push(*args, **kwargs):
 
     if 'norestart' not in args:
         uwsgi.uwsgi_reload()
+        celery.celery_restart()
