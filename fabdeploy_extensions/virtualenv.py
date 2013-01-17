@@ -20,4 +20,4 @@ def virtualenv_create():
 def pip_update(what=None, options='', restart=True):
     """ Updates pip without reinstalling everything! """
     what = utils._pip_req_path(what or env.conf.PIP_REQUIREMENTS_ACTIVE)
-    run('pip install %s -r %s' % (options, what))
+    run('pip install %s -r %s --exists-action s' % (options, what))
