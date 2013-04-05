@@ -31,20 +31,17 @@ def celery_setup():
 @utils.run_as_sudo
 def celery_start():
     ''' Start Celery '''
-    with settings(warn_only=True):
-        sudo('/etc/init.d/celeryd_%s start' % env.conf['INSTANCE_NAME'])
+    sudo('/etc/init.d/celeryd_%s start' % env.conf['INSTANCE_NAME'])
 
 @utils.run_as_sudo
 def celery_stop():
     ''' Stop Celery '''
-    with settings(warn_only=True):
-        sudo('/etc/init.d/celeryd_%s stop' % env.conf['INSTANCE_NAME'])
+    sudo('/etc/init.d/celeryd_%s stop' % env.conf['INSTANCE_NAME'])
 
 @utils.run_as_sudo
 def celery_restart():
     ''' Restart Celery '''
-    with settings(warn_only=True):
-        sudo('/etc/init.d/celeryd_%s restart' % env.conf['INSTANCE_NAME'])
+    sudo('/etc/init.d/celeryd_%s restart' % env.conf['INSTANCE_NAME'])
 
 @utils.run_as_sudo
 def celery_reload():
@@ -70,22 +67,19 @@ def celerybeat_setup():
 @utils.run_as_sudo
 def celerybeat_start():
     ''' Start Celerybeat '''
-    with settings(warn_only=True):
-        sudo('/etc/init.d/celerybeat_%s start' % env.conf['INSTANCE_NAME'])
+    sudo('/etc/init.d/celerybeat_%s start' % env.conf['INSTANCE_NAME'])
 
 
 @utils.run_as_sudo
 def celerybeat_stop():
     ''' Stop Celerybeat '''
-    with settings(warn_only=True):
-        sudo('/etc/init.d/celerybeat_%s stop' % env.conf['INSTANCE_NAME'])
+    sudo('/etc/init.d/celerybeat_%s stop' % env.conf['INSTANCE_NAME'])
 
 
 @utils.run_as_sudo
 def celerybeat_restart():
     ''' Restart Celerybeat '''
-    with settings(warn_only=True):
-        sudo('/etc/init.d/celerybeat_%s restart' % env.conf['INSTANCE_NAME'])
+    sudo('/etc/init.d/celerybeat_%s restart' % env.conf['INSTANCE_NAME'])
 
 
 @utils.run_as_sudo
